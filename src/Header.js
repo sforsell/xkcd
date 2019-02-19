@@ -22,13 +22,13 @@ export class Header extends Component {
     return (
       <nav>
         <div className="nav-wrapper black">
-          <a href="" className="brand-logo" onClick={this.handleHomeClick}> XKCD</a>
+          <h2 className="brand-logo" onClick={this.handleHomeClick}> XKCD</h2>
           <ul className="right">
             <li>
-              <a href="" onClick={this.handleFavoritesClick}>
-              <img src="./heart.png" alt="red heart" class="heart"/>
-              <div class="btn-floating btn-small black-text valign-wrapper white smaller"> nn </div>
-              </a>
+              <div onClick={this.handleFavoritesClick}>
+                <img src="./heart.png" alt="red heart" className="navheart"/>
+                <div className="btn-floating btn-small black-text valign-wrapper white smaller"> nn </div>
+              </div>
             </li>  
           </ul>
         </div>
