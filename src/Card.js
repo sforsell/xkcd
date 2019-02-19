@@ -4,29 +4,18 @@ export class Card extends Component {
   constructor(){
     super()
     this.handleClick = this.handleClick.bind(this)
-    this.state = {
-      clicked:  false
-    }
   }
 
   handleClick = event => {
-    if (this.state.clicked) {
-      this.setState({
-        clicked: false
-      })
-    } else {
-      this.setState({
-        clicked: true
-      })
-    }
     this.props.onFavoriteComic(event);
   }
 
-  style() {
-    if (this.state.clicked) {
-      return "active";
-    }
-    return {};
+  setClassName(num) {
+    if (this.props.favorites.includes(num)) {
+      return "active"
+    } else {
+      return "inactive"
+    }  
   }
 
   render(){
@@ -36,7 +25,7 @@ export class Card extends Component {
           <div className="card transparent">
             <div className="card-content">
               <h1 className="card-title">{this.props.title}</h1>
-              <img src="./heart.png" id={this.props.num} onClick={this.handleClick} alt="red heart" className={`heart ${this.props.activation} ${this.style()}`} />
+              <img src="./heart.png" id={this.props.num} onClick={this.handleClick} alt="red heart" className={`heart ${this.setClassName(this.props.num)}`} />
               <p className="description"> #{this.props.num} &#9679; {this.props.date} </p>
               <img className="responsive-img" src={this.props.img} alt={this.props.alt} />
               <p className="description"> {this.props.alt}</p>

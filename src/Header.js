@@ -5,7 +5,6 @@ export class Header extends Component {
     super()
     this.handleHomeClick = this.handleHomeClick.bind(this)
     this.handleFavoritesClick = this.handleFavoritesClick.bind(this)
-
   }
 
   handleHomeClick(event) {
@@ -27,7 +26,7 @@ export class Header extends Component {
             <li>
               <div onClick={this.handleFavoritesClick}>
                 <img src="./heart.png" alt="red heart" className="navheart"/>
-                <div className="btn-floating btn-small black-text valign-wrapper white smaller"> nn </div>
+                <div className="btn-floating btn-small black-text valign-wrapper white smaller"> {this.props.numFavorites} </div>
               </div>
             </li>  
           </ul>
