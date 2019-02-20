@@ -21,7 +21,7 @@ export class Card extends Component {
   render(){
     return (
       <div className="row">
-        <div className="col s12 m6 offset-m3">
+        <div className="col s12 m8 offset-m2">
           <div className="card transparent">
             <div className="card-content">
               <h1 className="card-title">{this.props.title}</h1>

@@ -1,8 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Monaco,
-    sans-serif;
+  font-family: Monaco, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #96A8C8
@@ -23,6 +22,11 @@ p {
 	font-size: 11px;
 }
 
+.back-arrow {
+	font-size: 200%;
+	padding-left: 15px;
+}
+
 .navheart {
 	height: 25%;
 	width: 25%;
@@ -30,8 +34,8 @@ p {
 }
 
 .heart {
-	max-height: 8%;
-	max-width: 8%;
+	max-height: 5%;
+	max-width: 5%;
 	float: right;
 }
 
@@ -55,4 +59,8 @@ p {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
+}
+
+.thumb {
+  text-align: center;
 }

@@ -10,30 +10,30 @@ class App extends Component {
     super()
     this.selectHome = this.selectHome.bind(this);
     this.selectFavorites = this.selectFavorites.bind(this)
-    this.updateNumFavorites = this.updateNumFavorites.bind(this)
     this.state = {
       view: <Feed endPoint='/info.0.json' numFav={this.updateNumFavorites}/>,
-      numFavorites: 0
+      numFavorites: 0,
+      homeView: true
     };
   }
 
   updateNumFavorites = (n) => {
     this.setState({
       numFavorites: n
-    }, () => {
-      console.log(this.state.numFavorites)
     });
   }
 
   selectHome() {
     this.setState({
-      view: <Feed endPoint='/info.0.json' numFav={this.updateNumFavorites} />
+      view: <Feed endPoint='/info.0.json' numFav={this.updateNumFavorites} />,
+      homeView: true 
     });
   }
 
   selectFavorites() {
     this.setState({
-      view: <Favorites numFav={this.state.numFavorites} />
+      view: <Favorites numFav={this.state.numFavorites} />,
+      homeView: false 
     });
   }
 
@@ -52,7 +52,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header onSelectFavorites={this.selectFavorites} onSelectHome={ this.selectHome } numFavorites={this.state.numFavorites} />
+        <Header homeView={this.state.homeView} onSelectFavorites={this.selectFavorites} onSelectHome={ this.selectHome }  numFav={this.state.numFavorites}/>
         <div id="main">
           <div className="container">
             {this.state.view}
