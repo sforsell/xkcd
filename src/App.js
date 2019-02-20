@@ -8,10 +8,8 @@ import {Favorites} from './Favorites';
 class App extends Component {
   constructor(){
     super()
-    this.selectHome = this.selectHome.bind(this);
-    this.selectFavorites = this.selectFavorites.bind(this)
     this.state = {
-      view: <Feed endPoint='/info.0.json' numFav={this.updateNumFavorites}/>,
+      view: <Feed endPoint='/info.0.json' numFav={this.updateNumFavorites} />,
       numFavorites: 0,
       homeView: true
     };
@@ -23,23 +21,23 @@ class App extends Component {
     });
   }
 
-  selectHome() {
+  selectHome = () => {
     this.setState({
       view: <Feed endPoint='/info.0.json' numFav={this.updateNumFavorites} />,
       homeView: true 
     });
   }
 
-  selectFavorites() {
+  selectFavorites = () => {
     this.setState({
       view: <Favorites numFav={this.state.numFavorites} />,
       homeView: false 
     });
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     const id = localStorage.getItem("xkcdUserId")
-    if ( id !== null) {
+    if ( id !== null ) {
       axios.get(`http://localhost:3000/users/${id}`)
         .then((response) => {
           this.setState(prevState => ({
@@ -47,12 +45,12 @@ class App extends Component {
           }))
         })
     }
-  }   
+  }  
 
   render() {
     return (
       <div className="App">
-        <Header homeView={this.state.homeView} onSelectFavorites={this.selectFavorites} onSelectHome={ this.selectHome }  numFav={this.state.numFavorites}/>
+        <Header homeView={this.state.homeView} onSelectFavorites={this.selectFavorites} onSelectHome={this.selectHome}  numFav={this.state.numFavorites} />
         <div id="main">
           <div className="container">
             {this.state.view}

@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 
 export class Card extends Component {
-  constructor(){
-    super()
-    this.handleClick = this.handleClick.bind(this)
-  }
 
   handleClick = event => {
     this.props.onFavoriteComic(event);
   }
 
-  setClassName(num) {
+  setClassName = (num) => {
     if (this.props.favorites.includes(num)) {
       return "active"
     } else {
       return "inactive"
     }  
   }
+
 
   render(){
     return (

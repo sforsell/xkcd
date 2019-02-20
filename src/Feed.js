@@ -3,12 +3,9 @@ import axios from 'axios';
 import {Card} from './Card';
 
 
-
 export class Feed extends Component {
   constructor(){
     super()
-    //this.toggleFavorite = this.toggleFavorite.bind(this);
-    //this.getFavorites = this.getFavorites.bind(this);
     this.state = {
       newest: null,
       currentMax: null,
@@ -40,11 +37,11 @@ export class Feed extends Component {
     };
   }
 
-  dateOrdinal(d) {
+  dateOrdinal = (d) => {
     return d+(31===d||21===d||1===d?"st":22===d||2===d?"nd":23===d||3===d?"rd":"th")
   };
 
-  prettyDate(d, m, y) {
+  prettyDate = (d, m, y) => {
     const prettyMonth = new Date(m).toLocaleDateString("en-US", { month: 'long' });
     const prettyDay = this.dateOrdinal(d)
     const prettyDate = `${prettyMonth} ${prettyDay} ${y}`
@@ -79,26 +76,19 @@ export class Feed extends Component {
   getFavorites = () => {
     const id = localStorage.getItem("xkcdUserId")
     if ( id !== null) {
-      axios.get(`http://localhost:3000/users/${id}`)
-        .then((response) => {
-          for (var i = 0; i < response.data.length; i++) {
-            this.setState(prevState => ({
-              favorites: [...prevState.favorites, response.data[i].num.toString()]
-            }))
-          }
-        })
-    } else {
-      console.log("no user yet")
+      axios.get(`http://localhost:3000/users/${id}`).then((response) => {
+        for (var i = 0; i < response.data.length; i++) {
+          this.setState(prevState => ({
+            favorites: [...prevState.favorites, response.data[i].num.toString()]
+          }));
+        }
+      });
     }
   }
 
   toggleFavorite = (e) => {
     const comicId = e.currentTarget.id
-    let userId = localStorage.getItem("xkcdUserId")
-
-    if ( userId === null) {
-      this.createUser();
-    }   
+    let userId = localStorage.getItem("xkcdUserId");
 
     if (this.state.favorites.includes(comicId)) {
       axios.delete(`http://localhost:3000/users/${userId}/comics/${comicId}`)
@@ -107,7 +97,7 @@ export class Feed extends Component {
             const updatedFavorites = this.state.favorites.filter(comicNum => comicNum !== comicId.toString());
             this.setState(
               { favorites: updatedFavorites },
-              this.props.numFav(this.state.favorites.length - 1)
+              this.props.numFav(this.state.favorites.length - 1) // forcing realtime value to propagate
             )
           }
         })    
@@ -124,21 +114,26 @@ export class Feed extends Component {
           this.setState(prevState => (
             { favorites: [...prevState.favorites, comicId] }
           ), 
-          this.props.numFav(this.state.favorites.length + 1))
+          this.props.numFav(this.state.favorites.length + 1)) // forcing realtime value to propagate
         }  
       });
     }
   }
 
-  createUser() {
-    axios.post('http://localhost:3000/users').then((response) => {
-      if (response.status === 200) {
-        localStorage.setItem("xkcdUserId", response.data.id);
-      }
-    })
+  createUser = () => {
+    if (localStorage.getItem("xkcdUserId") === null) {
+      axios.post('http://localhost:3000/users').then((response) => {
+        if (response.status === 200) {
+          localStorage.setItem("xkcdUserId", response.data.id);
+        }
+      })
+    }
   }
 
-  componentDidMount(){
+  componentDidMount = () => {
+    // because of async behaviour create user immediately,
+    // ideally createUser would be called in toggleFavorite 
+    this.createUser(); 
     axios.get(this.props.endPoint).then((response) => {
       this.setState({
         newest: response.data.num,
@@ -148,6 +143,7 @@ export class Feed extends Component {
       );
     }).then(this.getFavorites)
   }
+
 
   render(){
     let sortedComics = this.state.comics.sort(function(a,b) {

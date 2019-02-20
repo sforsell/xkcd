@@ -7,7 +7,7 @@ export class Thumbnail extends Component {
     return(
       <div className="thumb col m3">
       	<h1> {this.props.title} </h1>
-        <MediaBox src={this.props.img} className="responsive-img" width="650" alt="" />
+        <MediaBox src={this.props.img} className="responsive-img transparent" alt="" />
       </div>
     )
   }

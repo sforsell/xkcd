@@ -1,26 +1,15 @@
 import React, { Component } from 'react';
 
 export class Header extends Component {
-  constructor(){
-    super()
-    this.handleHomeClick = this.handleHomeClick.bind(this)
-    this.handleFavoritesClick = this.handleFavoritesClick.bind(this)
-  }
 
-  handleHomeClick(event) {
-    event.preventDefault();
+  handleHomeClick = (event) => {
     this.props.onSelectHome();
   }
 
-  handleFavoritesClick(event){
+  handleFavoritesClick = (event) => {
     this.props.onSelectFavorites();
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.numFav !== prevProps.numFav) {
-      return this.props.numFav;
-    }
-  }
 
   render(){
     return (
