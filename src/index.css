@@ -1,8 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Monaco,
-    sans-serif;
+  font-family: Monaco, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #96A8C8
@@ -10,20 +9,34 @@ body {
 
 h1 {
 	font-size: 25px;
+	color: white;
 }
 
 h2 {
 	font-size: 22px;
+	color: white;
+	top: -10px;
 }
 
 p {
 	font-size: 11px;
 }
 
-.heart {
+.back-arrow {
+	font-size: 200%;
+	padding-left: 15px;
+}
+
+.navheart {
 	height: 25%;
 	width: 25%;
 	vertical-align: middle;
+}
+
+.heart {
+	max-height: 5%;
+	max-width: 5%;
+	float: right;
 }
 
 .smaller {
@@ -35,6 +48,19 @@ p {
 	color: #505B6E;
 }
 
-.material-icons.md-48 {
-	color: #E53935;
+.inactive {
+	opacity: 0.25;
+}
+.active {
+	opacity: 1.0;
+}
+
+.card {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.thumb {
+  text-align: center;
 }

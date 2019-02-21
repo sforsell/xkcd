@@ -1,34 +1,32 @@
 import React, { Component } from 'react';
 
 export class Header extends Component {
-  constructor(){
-    super()
-    this.handleHomeClick = this.handleHomeClick.bind(this)
-    this.handleFavoritesClick = this.handleFavoritesClick.bind(this)
 
-  }
-
-  handleHomeClick(event) {
-    event.preventDefault();
+  handleHomeClick = (event) => {
     this.props.onSelectHome();
   }
 
-  handleFavoritesClick(event){
-    event.preventDefault();
+  handleFavoritesClick = (event) => {
     this.props.onSelectFavorites();
   }
+
 
   render(){
     return (
       <nav>
         <div className="nav-wrapper black">
-          <a href="" className="brand-logo" onClick={this.handleHomeClick}> XKCD</a>
+          {!this.props.homeView &&
+            <ul className="left">
+              <li className="back-arrow" onClick={this.handleHomeClick}> &#60; </li>
+            </ul>
+          }
+          <h2 className="brand-logo" onClick={this.handleHomeClick}> XKCD</h2>
           <ul className="right">
             <li>
-              <a href="" onClick={this.handleFavoritesClick}>
-              <img src="./heart.png" alt="red heart" class="heart"/>
-              <div class="btn-floating btn-small black-text valign-wrapper white smaller"> nn </div>
-              </a>
+              <div onClick={this.handleFavoritesClick}>
+                <img src="./heart.png" alt="red heart" className="navheart"/>
+                <div className="btn-floating btn-small black-text valign-wrapper white smaller"> {this.props.numFav} </div>
+              </div>
             </li>  
           </ul>
         </div>
