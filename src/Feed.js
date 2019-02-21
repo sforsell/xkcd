@@ -51,7 +51,7 @@ export class Feed extends Component {
   getComics = () => {
     this.setState({ isLoading: true }, () => {
       for (  var id = this.state.currentMax; id > this.state.currentMax - 10; id-- ) {
-        axios.get(`/${id}/info.0.json`).then(response => {
+        axios.get(`https://sforsell-xkcd-backend.herokuapp.com/xkcd/${id}/info.0.json`).then(response => {
           const nextComic = {
             num: `${response.data.num}`,
             date: this.prettyDate(`${response.data.day}`, `${response.data.month}`, `${response.data.year}`),
@@ -70,7 +70,7 @@ export class Feed extends Component {
       this.setState(prevState => ({
         currentMax: prevState.currentMax - 10
       }))
-    });    
+    });
   }
 
   getFavorites = () => {
@@ -100,7 +100,7 @@ export class Feed extends Component {
               this.props.numFav(this.state.favorites.length - 1) // forcing realtime value to propagate
             )
           }
-        })    
+        })
     } else {
       let newComic = this.state.comics.find(comic => comic.num === comicId)
       axios.post(`https://sforsell-xkcd-backend.herokuapp.com/users/${userId}/comics`,
@@ -113,9 +113,9 @@ export class Feed extends Component {
         if (response.status=== 200) {
           this.setState(prevState => (
             { favorites: [...prevState.favorites, comicId] }
-          ), 
+          ),
           this.props.numFav(this.state.favorites.length + 1)) // forcing realtime value to propagate
-        }  
+        }
       });
     }
   }
@@ -132,8 +132,8 @@ export class Feed extends Component {
 
   componentDidMount = () => {
     // because of async behaviour create user immediately,
-    // ideally createUser would be called in toggleFavorite 
-    this.createUser(); 
+    // ideally createUser would be called in toggleFavorite
+    this.createUser();
     axios.get(this.props.endPoint).then((response) => {
       this.setState({
         newest: response.data.num,
@@ -157,7 +157,7 @@ export class Feed extends Component {
             <Card key={i} num={num} date={date} onFavoriteComic={this.toggleFavorite} title={title} alt={alt} img={img} favorites={this.state.favorites} />
           )
         })}
-        
+
       </div>
     )
   }

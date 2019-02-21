@@ -9,7 +9,7 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      view: <Feed endPoint='/info.0.json' numFav={this.updateNumFavorites} />,
+      view: <Feed endPoint='https://sforsell-xkcd-backend.herokuapp.com/xkcd/info.0.json' numFav={this.updateNumFavorites} />,
       numFavorites: 0,
       homeView: true
     };
@@ -23,15 +23,15 @@ class App extends Component {
 
   selectHome = () => {
     this.setState({
-      view: <Feed endPoint='/info.0.json' numFav={this.updateNumFavorites} />,
-      homeView: true 
+      view: <Feed endPoint='https://sforsell-xkcd-backend.herokuapp.com/xkcd/info.0.json' numFav={this.updateNumFavorites} />,
+      homeView: true
     });
   }
 
   selectFavorites = () => {
     this.setState({
       view: <Favorites numFav={this.state.numFavorites} />,
-      homeView: false 
+      homeView: false
     });
   }
 
@@ -45,7 +45,7 @@ class App extends Component {
           }))
         })
     }
-  }  
+  }
 
   render() {
     return (
@@ -54,7 +54,7 @@ class App extends Component {
         <div id="main">
           <div className="container">
             {this.state.view}
-          </div>  
+          </div>
         </div>
       </div>
     );

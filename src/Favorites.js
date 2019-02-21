@@ -28,7 +28,7 @@ export class Favorites extends Component {
     return (
       <div className="row">
         {this.props.numFav === 0 ? (
-          <div>	
+          <div>
             <h1> No Favorites, Yet... </h1>
             <p> Click on the heart of a comic and it will be added here </p>
           </div>
