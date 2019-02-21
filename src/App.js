@@ -38,7 +38,7 @@ class App extends Component {
   componentDidMount = () => {
     const id = localStorage.getItem("xkcdUserId")
     if ( id !== null ) {
-      axios.get(`http://localhost:3000/users/${id}`)
+      axios.get(`https://sforsell-xkcd-backend.herokuapp.com/users/${id}`)
         .then((response) => {
           this.setState(prevState => ({
             numFavorites: response.data.length

@@ -76,7 +76,7 @@ export class Feed extends Component {
   getFavorites = () => {
     const id = localStorage.getItem("xkcdUserId")
     if ( id !== null) {
-      axios.get(`http://localhost:3000/users/${id}`).then((response) => {
+      axios.get(`https://sforsell-xkcd-backend.herokuapp.com/users/${id}`).then((response) => {
         for (var i = 0; i < response.data.length; i++) {
           this.setState(prevState => ({
             favorites: [...prevState.favorites, response.data[i].num.toString()]
@@ -91,7 +91,7 @@ export class Feed extends Component {
     let userId = localStorage.getItem("xkcdUserId");
 
     if (this.state.favorites.includes(comicId)) {
-      axios.delete(`http://localhost:3000/users/${userId}/comics/${comicId}`)
+      axios.delete(`https://sforsell-xkcd-backend.herokuapp.com/${userId}/comics/${comicId}`)
         .then((response) => {
           if (response.status=== 200) {
             const updatedFavorites = this.state.favorites.filter(comicNum => comicNum !== comicId.toString());
@@ -103,7 +103,7 @@ export class Feed extends Component {
         })    
     } else {
       let newComic = this.state.comics.find(comic => comic.num === comicId)
-      axios.post(`http://localhost:3000/users/${userId}/comics`,
+      axios.post(`https://sforsell-xkcd-backend.herokuapp.com/users/${userId}/comics`,
         {
           num: comicId,
           title: newComic.title,
@@ -122,7 +122,7 @@ export class Feed extends Component {
 
   createUser = () => {
     if (localStorage.getItem("xkcdUserId") === null) {
-      axios.post('http://localhost:3000/users').then((response) => {
+      axios.post('https://sforsell-xkcd-backend.herokuapp.com/users').then((response) => {
         if (response.status === 200) {
           localStorage.setItem("xkcdUserId", response.data.id);
         }
